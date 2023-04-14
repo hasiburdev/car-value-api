@@ -1,17 +1,22 @@
 import {
   Body,
   Controller,
+  Get,
   InternalServerErrorException,
   Post,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from '@prisma/client';
+import { AuthGuard } from 'src/guards/auth.guard';
 
-@Serialize(UserDto)
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private readonly authService: AuthService) {}
 
@@ -37,5 +42,11 @@ export class UsersController {
   @Post('/signout')
   async signout(@Session() session: any) {
     session.userId = null;
+  }
+
+  @Get('/whoami')
+  @UseGuards(AuthGuard)
+  whoAmI(@CurrentUser() user: User) {
+    return user;
   }
 }
