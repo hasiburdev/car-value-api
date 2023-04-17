@@ -6,14 +6,24 @@ import { ReportsModule } from './reports/reports.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
 import { APP_PIPE } from '@nestjs/core';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
 
 @Module({
-  imports: [UsersModule, ReportsModule, PrismaModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
+    UsersModule,
+    ReportsModule,
+    PrismaModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
+    ConfigService,
     PrismaService,
     {
       provide: APP_PIPE,
