@@ -3,13 +3,13 @@ POST http://localhost:3000/reports
 Content-Type: application/json
 
 {
-    "make": "Toyota",
-    "model": "Corolla",
-    "year": 2015,
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 1982,
     "price": 20000,
     "milage": 10000,
     "latitude": 40.7128,
-    "longitude": 74.0060
+    "longitude": 73.0060
 }
 
 ### Approve an existing report
@@ -17,5 +17,9 @@ PATCH http://localhost:3000/reports/5f26f8e1-b80d-44a2-8c86-38cefd1bc0c8
 Content-Type: application/json
 
 {
-    "approved": true
+    "approved": false
 }
+
+
+### Get an estimate for an existing report
+GET http://localhost:3000/reports?make=Toyota&model=Corolla&year=2015&price=20000&milage=10000&latitude=40.7128&longitude=74.0060
