@@ -11,3 +11,11 @@ Content-Type: application/json
     "latitude": 40.7128,
     "longitude": 74.0060
 }
+
+### Approve an existing report
+PATCH http://localhost:3000/reports/5f26f8e1-b80d-44a2-8c86-38cefd1bc0c8
+Content-Type: application/json
+
+{
+    "approved": true
+}

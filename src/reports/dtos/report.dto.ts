@@ -17,6 +17,9 @@ export class ReportDto {
   milage: number;
 
   @Expose()
+  approved: boolean;
+
+  @Expose()
   price: number;
 
   @Expose()

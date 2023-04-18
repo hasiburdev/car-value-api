@@ -28,7 +28,7 @@ export class UsersController {
       return user;
     } catch (error) {
       console.log(error);
-      throw new InternalServerErrorException('Error creating user');
+      throw error;
     }
   }
 
